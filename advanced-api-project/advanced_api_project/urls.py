@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.urls import path, include 
 from django.contrib import admin
+from django.http import HttpResponse #Add this import
 from api.views import list_authors #This imports list_authors
 
+def home_view(request):
+    """Simple view for the root URL."""
+    return HttpResponse("Welcome to the Advanced API Project! Try <a href='/authors/'>/authors/<a> for the API.")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
