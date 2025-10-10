@@ -2,8 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-from django.db import models
-
 class Author(models.Model):
     """Stores the author's name."""
     name = models.CharField(max_length=100, help_text="Author's full name")

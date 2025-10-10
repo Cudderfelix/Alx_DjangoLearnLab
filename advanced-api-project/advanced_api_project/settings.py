@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'advanced_api_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': os.getenv('DB_NAME', 'intro_db'),
         'USER': os.getenv('DB_USER', 'alx_client'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'alx_pass'),
