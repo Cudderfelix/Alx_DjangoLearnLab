@@ -5,6 +5,11 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
+from django.shortcuts import render
+
+class HomeView(APIView):
+    def get(self, request):
+        return render(request, 'accounts/home.html')
 
 class RegisterView(APIView):
     def post(self, request):
