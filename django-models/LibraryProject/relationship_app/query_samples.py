@@ -28,9 +28,9 @@ def get_librarian_for_library(library_name):
     """
     Retrieve the librarian for a library.
     """
-    library = Librarian.objects.get(name=library_name)
+    library = Library.objects.get(name=library_name)
     try:
-        librarian = library.librarian
+        librarian = librarian.objects.get(library=library)
         print(f"Librarian for '{library_name}': {librarian}")
     except Librarian.DoesNotExist:
         print(f"No librarian assigned to '{library_name}'.")
