@@ -33,7 +33,7 @@ class Library(models.Model):
     
 
 
-class librarian(models.Model):
+class Librarian(models.Model):
     name = models.CharField(max_length=200)
     library = models.OneToOneField(Library, on_delete=models.CASCADE, related_name="librarian")
 
