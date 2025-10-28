@@ -18,12 +18,6 @@ class LibraryDetailView(DetailView):
 
 
 # Authentication Views
-class CustomLoginView(LoginView):
-    template_name = 'relationship_app/login.html'
-
-class CustomLogoutView(LogoutView):
-    template_name = 'relationship_app/logged_out.html'
-
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
