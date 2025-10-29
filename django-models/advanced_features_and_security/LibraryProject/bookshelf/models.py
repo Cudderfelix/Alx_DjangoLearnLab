@@ -1,4 +1,4 @@
-# relationship_app/models.py
+# LibraryProject/bookshelf/models.py
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db.models.signals import post_save
@@ -19,12 +19,6 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
-
         return self.create_user(email, password, **extra_fields)
 
 
@@ -43,18 +37,15 @@ class CustomUser(AbstractUser):
         return self.email
 
 
-# --- USER PROFILE (ROLE) ---
+# --- USER PROFILE ---
 class UserProfile(models.Model):
     ROLE_CHOICES = [
         ('Admin', 'Admin'),
         ('Librarian', 'Librarian'),
         ('Member', 'Member'),
     ]
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)  # Updated
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Member')
-
-    def __str__(self):
-        return f"{self.user.email} - {self.role}"
 
 
 # --- OTHER MODELS ---

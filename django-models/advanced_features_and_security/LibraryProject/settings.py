@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bookshelf','relationship_app',
+    'bookshelf',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +130,6 @@ AUTH_USER_MODEL = 'relationship_app.CustomUser'   # REQUIRED
 # Add for image uploads
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# LibraryProject/settings.py
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
