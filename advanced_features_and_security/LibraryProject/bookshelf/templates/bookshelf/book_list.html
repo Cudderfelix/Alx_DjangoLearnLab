@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html><head><title>Books</title></head><body>
+<h1>Books</h1>
+<a href="{% url 'bookshelf:book_create' %}">Add Book</a>
+<ul>
+{% for book in books %}
+    <li>{{ book.title }} by {{ book.author }}
+        <a href="{% url 'bookshelf:book_edit' book.pk %}">Edit</a>
+        <a href="{% url 'bookshelf:book_delete' book.pk %}">Delete</a>
+    </li>
+{% empty %}
+    <li>No books.</li>
+{% endfor %}
+</ul>
+</body></html>
