@@ -1,5 +1,5 @@
 # Django Installtion & Configuration
-
+#Django is good.
 # Description
   * This repository helps test out installation and configuration
   * Connect with the mysql database via mysql python connector

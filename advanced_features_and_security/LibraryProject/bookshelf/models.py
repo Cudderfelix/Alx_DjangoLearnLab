@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+# --- CUSTOM USER ---
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -35,6 +36,25 @@ class CustomUser(AbstractUser):
         return self.email
 
 
+# --- BOOK MODEL WITH EXACT PERMISSIONS ---
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    publication_year = models.IntegerField(null=True, blank=True)
+
+    class Meta:
+        permissions = [
+            ("can_view", "Can view book"),
+            ("can_create", "Can create book"),   # REQUIRED EXACT LINE
+            ("can_edit", "Can edit book"),
+            ("can_delete", "Can delete book"),
+        ]
+
+    def __str__(self):
+        return self.title
+
+
+# --- USER PROFILE ---
 class UserProfile(models.Model):
     ROLE_CHOICES = [
         ('Admin', 'Admin'),
@@ -43,28 +63,6 @@ class UserProfile(models.Model):
     ]
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Member')
-
-
-class Author(models.Model):
-    name = models.CharField(max_length=100)
-
-
-class Book(models.Model):
-    title = models.CharField(max_length=200)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    publication_year = models.IntegerField(null=True, blank=True)
-
-    class Meta:
-        permissions = [
-            ("can_add_book", "Can add book"),
-            ("can_change_book", "Can change book"),
-            ("can_delete_book", "Can delete book"),
-        ]
-
-
-class Library(models.Model):
-    name = models.CharField(max_length=100)
-    books = models.ManyToManyField(Book)
 
 
 @receiver(post_save, sender=CustomUser)
